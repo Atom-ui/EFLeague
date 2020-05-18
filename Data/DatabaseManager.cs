@@ -1,5 +1,4 @@
 ﻿using Data.Models;
-using LeagueApp;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -10,7 +9,7 @@ namespace Data
 {
     public class DatabaseManager
     {
-        private LeagueContext _lgCtx = new LeagueContext();
+        private readonly LeagueContext _lgCtx = new LeagueContext();
         public void InitialiseerDatabank(string path)
         {
             Dictionary<int, Team> teams = new Dictionary<int, Team>();

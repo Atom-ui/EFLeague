@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace LeagueApp
+namespace Data
 {
     public class LeagueContext : DbContext
     {
@@ -14,10 +14,6 @@ namespace LeagueApp
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(@"Data Source=LAPTOP-1U6AQSEQ\SQLEXPRESS;Initial Catalog=EFLeague;Integrated Security=True");
-        }
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            
         }
     }
 }
