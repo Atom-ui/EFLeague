@@ -4,16 +4,14 @@ using LeagueApp;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace LeagueApp.Migrations
+namespace Data.Migrations
 {
     [DbContext(typeof(LeagueContext))]
-    [Migration("20200516092151_InitialCreate")]
-    partial class InitialCreate
+    partial class LeagueContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

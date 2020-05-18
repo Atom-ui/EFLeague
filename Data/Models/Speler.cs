@@ -24,6 +24,22 @@ namespace Data.Models
         public int Waarde { get; set; }
         public int TeamId { get; set; }
         public Team Team { get; set; }
+
+        public override bool Equals(object obj)
+        {
+            return obj is Speler speler &&
+                   Id == speler.Id &&
+                   Naam == speler.Naam &&
+                   Waarde == speler.Waarde &&
+                   TeamId == speler.TeamId &&
+                   EqualityComparer<Team>.Default.Equals(Team, speler.Team);
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(Id, Naam, Waarde, TeamId, Team);
+        }
+
         public override string ToString()
         {
             return $"Id: {Id}, Naam: {Naam}, Geschatte Waarde: {Waarde}, TeamId: {TeamId}, Teamnaam: {Team.Naam}";

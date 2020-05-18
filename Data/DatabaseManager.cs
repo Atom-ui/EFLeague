@@ -1,15 +1,14 @@
 ﻿using Data.Models;
+using LeagueApp;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
 
-namespace LeagueApp
+namespace Data
 {
-    public class DBManager
+    public class DatabaseManager
     {
         private LeagueContext _lgCtx = new LeagueContext();
         public void InitialiseerDatabank(string path)
@@ -55,32 +54,30 @@ namespace LeagueApp
         {
             _lgCtx.Transfers.Add(transfer);
             _lgCtx.SaveChanges();
+            transfer.Speler.TeamId = transfer.NieuweClub.Stamnummer;
+            UpdateSpeler(transfer.Speler);
         }
-        public void UpdateSpeler (Speler speler)
+        public void UpdateSpeler(Speler speler)
         {
-            Speler sp = SelecteerSpeler(speler.Id);
-            sp = speler;
+            _ = SelecteerSpeler(speler.Id);
             _lgCtx.SaveChanges();
-        } // Wat moet er hier komen?
+        }
         public void UpdateTeam(Team team)
         {
-
+            _ = SelecteerTeam(team.Stamnummer);
+            _lgCtx.SaveChanges();
         }
         public Speler SelecteerSpeler(int SpelerId)
         {
-            var s = _lgCtx.Spelers.Single(speler => speler.Id == SpelerId); // geeft de speler terug zonder team
-            var x = _lgCtx.Teams.Single(team => team.Stamnummer == s.TeamId);
-            s.Team = x; // voegt het team toe aan speler;
-            var test = _lgCtx.Spelers.Include(speler => speler.Team); // include methode, begrijp ik nog niet
-            return s;
+            return _lgCtx.Spelers.Include(speler => speler.Team).Single(speler => speler.Id == SpelerId);
         }
         public Team SelecteerTeam(int stamnummer)
         {
-            return _lgCtx.Teams.Single(team => team.Stamnummer == stamnummer);
+            return _lgCtx.Teams.Include(team => team.Spelers).Single(team => team.Stamnummer == stamnummer);
         }
         public Transfer SelecteerTranfer(int transferId)
         {
-            return _lgCtx.Transfers.Single(transfer => transfer.Id == transferId);
+            return _lgCtx.Transfers.Include(transfer => transfer.Speler).Include(t => t.OudeClub).Include(t => t.NieuweClub).Single(t => t.Id == transferId);
         }
     }
 }

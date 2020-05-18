@@ -26,5 +26,16 @@ namespace Data.Models
         {
             Spelers.Add(speler);
         }
+        public void RemoveSpeler(Speler speler)
+        {
+            Spelers.Remove(speler);
+        }
+        public override string ToString()
+        {
+            string start = $"Stamnummer: {Stamnummer}, Naam: {Naam}, Bijnaam: {Bijnaam}, Trainer: {Trainer}";
+            foreach (var s in Spelers)
+                start += $"\n   {s.ToString()}";
+            return start;
+        }
     }
 }

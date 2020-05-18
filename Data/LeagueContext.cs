@@ -13,7 +13,11 @@ namespace LeagueApp
         public DbSet<Transfer> Transfers { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Data Source=LAPTOP-1U6AQSEQ\SQLEXPRESS;Initial Catalog=EFLeague2;Integrated Security=True");
+            optionsBuilder.UseSqlServer(@"Data Source=LAPTOP-1U6AQSEQ\SQLEXPRESS;Initial Catalog=EFLeague;Integrated Security=True");
+        }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            
         }
     }
 }

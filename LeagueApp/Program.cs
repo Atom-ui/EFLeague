@@ -1,20 +1,30 @@
 ﻿using Data.Models;
 using System;
+using Data;
+using System.Linq;
 
 namespace LeagueApp
 {
     class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
-            DBManager mng = new DBManager();
-            Team team = new Team(1, "test", "bijtest", "trainer");
-            Speler speler = new Speler("kwak", 20, team);
-            //mng.VoegSpelerToe(speler);
+            DatabaseManager dbmng = new DatabaseManager();
 
-            //mng.InitialiseerDatabank(@"C:\Users\davy\Documents\data\EFLeague\foot.csv");
-            Speler sp = mng.SelecteerSpeler(1);
-            Console.WriteLine(sp);
+            //dbmng.InitialiseerDatabank(@"C:\Users\davy\Documents\data\EFLeague\foot.csv");
+
+            //Speler speler1 = dbmng.SelecteerSpeler(5);
+            //////Console.WriteLine(speler1);
+            ////speler1.Naam = "trolololol";
+            //////dbmng.UpdateSpeler(speler1);
+            //Team nieuwTeam = dbmng.SelecteerTeam(3);
+
+            //dbmng.UpdateSpeler(speler1);
+            //Transfer transfer = new Transfer(speler1, 10, speler1.Team, nieuwTeam);
+            //dbmng.VoegTransferToe(transfer);
+
+            Transfer tr = dbmng.SelecteerTranfer(5);
+            Console.WriteLine(tr);
         }
     }
 }
